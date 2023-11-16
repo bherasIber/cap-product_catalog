@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # cap-product_catalog
 Logali curso CAP Product catgalog
 =======
@@ -27,4 +27,3 @@ File or Folder | Purpose
 ## Learn More
 
 Learn more at https://cap.cloud.sap/docs/get-started/.
->>>>>>> 5e1a687 (First commit to cap project)
