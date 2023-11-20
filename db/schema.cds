@@ -5,5 +5,3 @@ entity Customer {
         name : String;
 
 }
-
-
