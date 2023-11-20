@@ -1,6 +1,6 @@
 namespace com.logali;
 
-entity Customer {
+entity Products {
     key ID               : Integer;
         Name             : String;
         Description      : String;
