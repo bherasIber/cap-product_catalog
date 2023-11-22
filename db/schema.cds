@@ -71,7 +71,12 @@ entity Products {
         Height           : type of Price; //Decimal(16, 2);
         Width            : Decimal(16, 2);
         Depth            : Decimal(16, 2);
-        Quantity         : Decimal(16, 2)
+        Quantity         : Decimal(16, 2);
+        Supplier         : Association to one Suppliers;
+        UnitOfMeasure    : Association to UnitOfMeasures;
+        Currency         : Association to Currencies;
+        DimensionUnit    : Association to DimensionUnits;
+        Category         : Association to Categories;
 
 };
 
@@ -131,17 +136,21 @@ entity Months {
 };
 
 entity ProductReview {
-    key ID      : String(2);
+    key ID      : UUID;
         Rating  : Integer;
         Comment : String;
-        Name    : String not null;
+        Name    : String;
+        Product : Association to Products;
 
 };
 
 entity SalesData {
-    key ID           : UUID;
-        DeliveryDate : DateTime;
-        Revenue      : Decimal(16, 2);
+    key ID            : UUID;
+        DeliveryDate  : DateTime;
+        Revenue       : Decimal(16, 2);
+        Product       : Association to Products;
+        Currency      : Association to Currencies;
+        DeliveryMonth : Association to Months;
 };
 
 entity SelProducts   as select from Products;
@@ -200,4 +209,3 @@ extend Products with {
     PriceCondition     : String(2);
     PriceDetermination : String(3);
 };
-
