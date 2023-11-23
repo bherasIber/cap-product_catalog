@@ -77,7 +77,25 @@ entity Products {
         Currency         : Association to Currencies;
         DimensionUnit    : Association to DimensionUnits;
         Category         : Association to Categories;
+        SalesData        : Association to many SalesData
+                               on SalesData.Product = $self;
+        Reviews          : Association to many ProductReview
+                               on Reviews.Product = $self;
 
+};
+
+entity Orders {
+    key ID : UUID;
+    Date : Date;
+    Customer : String;
+    Item : Composition of many OrderItems on Item.Order = $self;
+};
+
+entity OrderItems {
+    key ID : UUID;
+    Order : Association to Orders;
+    Product : Association to Products;
+    Quantity : Integer;
 };
 
 entity Suppliers {
@@ -87,6 +105,8 @@ entity Suppliers {
         Email   : String;
         Phone   : String;
         Fax     : String;
+        Product : Association to many Products
+                      on Product.Supplier = $self;
 };
 
 /* entity Suppliers_02 {
@@ -208,4 +228,22 @@ entity ProjParamProducts(pName : String) as projection on Products where Name = 
 extend Products with {
     PriceCondition     : String(2);
     PriceDetermination : String(3);
+};
+
+entity Course {
+    key ID      : UUID;
+        Student : Association to many StudentCourse
+                      on Student.Course = $self;
+};
+
+entity Student {
+    key ID     : UUID;
+        Course : Association to many StudentCourse
+                     on Course.Student = $self;
+};
+
+entity StudentCourse {
+    key ID      : UUID;
+        Student : Association to Student;
+        Course  : Association to Course;
 };

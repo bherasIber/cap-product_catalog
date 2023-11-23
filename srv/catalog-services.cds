@@ -9,6 +9,10 @@ service CatalogService {
     entity DimensionUnits as projection on logali.DimensionUnits;
     entity Categories as projection on logali.Categories;
     entity Months as projection on logali.Months;
+    entity SalesData as projection on logali.SalesData;
+    entity ProductReview  as projection on logali.ProductReview;
+    entity Order as projection on logali.Orders;
+    entity OrderItem  as projection on logali.OrderItems;
 
 //entity Car       as projection on logali.Car;
 }
