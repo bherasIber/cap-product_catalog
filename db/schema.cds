@@ -81,14 +81,16 @@ context materials {
 
     entity ProjProducts  as projection on Products;
 
-    entity ProjProducts2 as projection on Products {
-        *
-    };
+    entity ProjProducts2 as
+        projection on Products {
+            *
+        };
 
-    entity ProjProducts3 as projection on Products {
-        ReleaseDate,
-        Name
-    };
+    entity ProjProducts3 as
+        projection on Products {
+            ReleaseDate,
+            Name
+        };
 
     extend Products with {
         PriceCondition     : String(2);
@@ -166,4 +168,40 @@ context sales {
 
     entity SelProducts  as select from materials.Products;
 
+};
+
+context reports {
+    entity AverageRating as
+        select from logali.materials.ProductReview {
+            Product.ID  as ProductID,
+            avg(Rating) as AverageRating : Decimal(16, 2)
+        }
+        group by
+            Product.ID;
+
+    entity Products      as
+        select from logali.materials.Products
+        mixin {
+            ToStockAvailability : Association to logali.materials.StockAvailability
+                                      on ToStockAvailability.ID = $projection.StockAvailability;
+            ToAverageRating     : Association to AverageRating
+                                      on ToAverageRating.ProductID = ID;
+        }
+        into {
+            *,
+            ToAverageRating.AverageRating as Rating,
+            case
+                when
+                    Quantity >= 0
+                then
+                    3
+                when
+                    Quantity > 0
+                then
+                    2
+                else
+                    1
+            end                           as StockAvailability : Integer,
+            ToStockAvailability
+        };
 };
