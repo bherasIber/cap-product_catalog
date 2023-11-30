@@ -22,6 +22,17 @@ entity StudentCourse : cuid {
     Student : Association to Student;
     Course  : Association to Course;
 };
+
+entity Orders {
+    key ClientEmail  : String(65);
+        FirstName    : String(30);
+        LastName     : String(30);
+        CreatedOn    : Date;
+        Reviewed     : Boolean;
+        Approved     : Boolean;
+        Country_code : String;
+        Status       : String;
+};
 /* type EmailsAddresses_01 : array of {
     kind  : String;
     email : String;
@@ -81,5 +92,3 @@ entity Order {
 
 entity ProjParamProducts(pName : String) as projection on Products where Name = :pName;
  */
-
-
