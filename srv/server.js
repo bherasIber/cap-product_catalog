@@ -1,7 +1,10 @@
 const cds = require("@sap/cds");
 const cors = require("cors");
+const adapterProxy = require("@sap/cds-odata-v2-adapter-proxy");
 
 cds.on("bootstrap", (app) => {
+
+    app.use(adapterProxy());
 
     app.use(cors());
 
