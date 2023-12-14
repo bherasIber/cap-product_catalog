@@ -8,9 +8,13 @@ cds.on("bootstrap", (app) => {
 
     app.use(cors());
 
-    app.get("/alive", (_,res) => {
+    app.get("/alive", (_, res) => {
         res.status(200).send("Server is Alive");
     });
 });
+
+if (process.env.NODE_ENV !== 'production') {
+    require("dotenv").config();
+};
 
 module.exports = cds.server;
