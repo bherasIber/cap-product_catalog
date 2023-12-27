@@ -41,7 +41,9 @@ define service CatalogService {
             ),
             UnitOfMeasure as ToUnitOfMeasure @mandatory,
             Currency      as ToCurrency      @mandatory,
+            Currency.ID   as CurrencyId,
             Category      as ToCategory      @mandatory,
+            Category.ID   as CategoryId,
             Category.Name as Category        @readonly,
             DimensionUnit as ToDimensionUnit @mandatory,
             SalesData,
@@ -172,8 +174,11 @@ define service Reports {
             Price as Price2 : Integer
         from logali.materials.Products;
 
-    entity EntityExists as select from logali.materials.Products {
-        Name
-    } where exists Supplier[Name = 'Exotic Liquids'];
+    entity EntityExists      as
+        select from logali.materials.Products {
+            Name
+        }
+        where
+            exists Supplier[Name = 'Exotic Liquids'];
 
 }

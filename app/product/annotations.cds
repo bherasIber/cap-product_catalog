@@ -2,6 +2,11 @@ using CatalogService as service from '../../srv/catalog-services';
 
 annotate service.Products with @(
 
+    Capabilities      : {DeleteRestrictions: {
+        $Type    : 'Capabilities.DeleteRestrictionsType',
+        Deletable: false
+    }, },
+
     UI.HeaderInfo     : {
         TypeName      : 'Product',
         TypeNamePlural: 'Products',
@@ -94,6 +99,13 @@ annotate service.Products with {
         ],
     }
 };
+
+annotate service.Products with {
+    CategoryId @title : 'Category';
+    CurrencyId @title : 'Currency';
+    StockAvailability @title : 'Stock Availability';
+};
+
 
 annotate service.Products with @(
     UI.FieldGroup #GeneratedGroup1: {
@@ -202,9 +214,9 @@ annotate service.Products with @(
             Target: '@UI.FieldGroup#GeneratedGroup1',
         },
     ],
-    UI.HeaderFacets : [{
+    UI.HeaderFacets               : [{
         $Type : 'UI.ReferenceFacet',
-        Target : '@UI.DataPoint#AverageRating'
+        Target: '@UI.DataPoint#AverageRating'
     }]
 
 );
