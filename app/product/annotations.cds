@@ -174,13 +174,13 @@ annotate service.Products with @(
                 Label: 'ToDimensionUnit_ID',
                 Value: ToDimensionUnit_ID,
             },
-            {
-                //$Type: 'UI.DataField',
-                Label : 'Rating',
-                //Value: Rating,
-                $Type : 'UI.DataFieldForAnnotation',
-                Target: '@UI.DataPoint#AverageRating'
-            },
+            // {
+            //     //$Type: 'UI.DataField',
+            //     Label : 'Rating',
+            //     //Value: Rating,
+            //     $Type : 'UI.DataFieldForAnnotation',
+            //     Target: '@UI.DataPoint#AverageRating'
+            // },
             {
                 $Type: 'UI.DataField',
                 Label: 'StockAvailability',
@@ -188,12 +188,25 @@ annotate service.Products with @(
             },
         ],
     },
-    UI.Facets                     : [{
+    UI.Facets                     : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID    : 'GeneratedFacet1',
+            Label : 'General Information',
+            Target: '@UI.FieldGroup#GeneratedGroup1',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID    : 'GeneratedFacet2',
+            Label : 'General Information Copia',
+            Target: '@UI.FieldGroup#GeneratedGroup1',
+        },
+    ],
+    UI.HeaderFacets : [{
         $Type : 'UI.ReferenceFacet',
-        ID    : 'GeneratedFacet1',
-        Label : 'General Information',
-        Target: '@UI.FieldGroup#GeneratedGroup1',
-    }, ]
+        Target : '@UI.DataPoint#AverageRating'
+    }]
+
 );
 
 annotate service.Products with {
@@ -201,7 +214,7 @@ annotate service.Products with {
 };
 
 /**
- * Anotations for SH Help
+ * Annotation for SH Help
  */
 annotate service.Products with {
     //Category
@@ -345,9 +358,9 @@ annotate service.Supplier with @(Communication: {Contact: {
 }, });
 
 /**
- * Data Ponint for Average Rating
+ * Annotation Data Ponint for Average Rating
  */
-annotate service.Products with @(UI.DataPoint #AverageRating : {
+annotate service.Products with @(UI.DataPoint #AverageRating: {
     Value        : Rating,
     Title        : 'Rating',
     TargetValue  : 5,
